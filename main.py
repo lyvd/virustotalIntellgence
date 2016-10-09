@@ -44,7 +44,7 @@ def parse_pe(newFile, avName = "Microsoft"):
 	# Check whether file size is lower than limit size
 	if fileSize >= constants.limit_size:
 		print("Hello")
-		'''
+		
 		# Informs user to decide scanning hash instead
 		userinp = raw_input('File ' + fileInfo.getName() + ' is larger than 32M. Submit its hash instead ? [Y/n]')
 
@@ -61,7 +61,7 @@ def parse_pe(newFile, avName = "Microsoft"):
 		# other cases
 		else:
 			sys.exit('Invalid userinput')
-			'''
+			
 	else:
 
 		# upload file to virustotal
@@ -115,6 +115,11 @@ def parse_pe(newFile, avName = "Microsoft"):
 
 				# AV update
 				av.setUpdate(report['scans'][i][constants.av_update])
+
+				# set trusted AV
+				av.setTrusted()
+
+				#print("AV trusted ", av.getTrusted())
 				
 				# Save AV info to the list
 				fileInfo.saveAvInfo(av)
@@ -126,6 +131,12 @@ def parse_pe(newFile, avName = "Microsoft"):
 		print("AV %s: %s" % (avName, fileInfo.AvDetected(avName)))
 		print("Virus name: %s" % (fileInfo.getVirusName(avName)))
 		print("Scan date: %s " % (fileInfo.getScanDate()))
+		print("Malware score: %d " %(fileInfo.mal_score()))
+		#print("Trusted AV: %s " %(fileInfo.isAvTrusted()))
+
+		# listing out all of AVs
+		#for i in fileInfo.av:
+		#	print("AV name: %s \n Trusted: %s " %(i.getName(), i.getTrusted()))
 		#fileInfo.getAvLabel(avName)
 
 		# get file behavior
@@ -133,9 +144,15 @@ def parse_pe(newFile, avName = "Microsoft"):
 		#print("Response code %d: " % behavior['response_code'])
 
 		# search
-		filesearch = search()
-		print(filesearch)
+		#filesearch = search()
+		#print(filesearch)
 
+
+'''
+Calculate malware score base on the detection rates of the antivirus
+Intially, if a malware is decteted by more than three Avs, we consider it malicious.
+'''
+#def malw_score()
 def file_scan(newFile, fileInfo):
 
 	# parameters	
@@ -229,7 +246,7 @@ def get_behavior(resource):
 	return json_response
 
 
-
+'''
 def search():
 
 	headers = {
@@ -245,6 +262,7 @@ def search():
 
 	return response_json
 
+'''
 def main():
 
 	# parse arguments
