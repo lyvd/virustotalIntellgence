@@ -2,13 +2,13 @@
 
 This scanning tool supports detecting virus/malware by using VirusTotal.
 
-Feaures including
+Features including:
 - Check whether a computer has infected by malware
 - Show malware reports which contain:
   + Malware detection labels from various anti-virus vendors 
   + Malware indicators such as IP addresses, Domain names which can be integrated into IDS. 
 - Calculate malware score base on the detection rates of antivirus vendors. To do that, we
- + define a list of trusted AV which are ten famous antivirus productes such as: Kaspersky, Symantect,...
+ + define a list of trusted AV which are ten famous antivirus productes such as: Kaspersky, Symantec,...
  + the score ranges from 1 to 10 where the score of 1 indicates that the malware is dectected by only one AV and the score of 10 shows that the malicious of malware is confirmed by ten AV.
  
 Requirements:
