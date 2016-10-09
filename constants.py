@@ -11,3 +11,7 @@ av_detected = 'detected'
 av_version = 'version'
 av_result = 'result'
 av_update = 'update'
+
+# top ten AVs
+top_av = ['Avast', 'BitDefender', 'F-Secure', 'Kaspersky',  
+'Symantec', 'TrendMicro', 'Microsoft', 'McAfee', 'Emsisoft'] 
