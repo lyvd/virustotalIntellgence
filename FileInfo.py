@@ -1,4 +1,5 @@
 
+import constants
 
 class Info:
 
@@ -38,6 +39,9 @@ class Info:
 		# av positives
 		self.positives = 0
 
+		# malware score
+		self.score = None
+
 	# set name
 	def setName(self, name):
 		self.name = name
@@ -65,11 +69,25 @@ class Info:
 			if(i.getName() == label):
 				return i.getDetected()
 
+	# get virus name
 	def getVirusName(self, label):
 		for i in self.av:
 			if(i.getName() == label):
 				return i.getResult()
 
+	# malware score
+	def mal_score(self):
+
+		s = 0
+		for i in self.av:
+			if( (i.getTrusted()) and(i.getDetected()) ):
+				s = s + 1
+		return s
+		'''		
+		if (s >= 3):
+			self.score = True
+			return self.score
+		'''	
 	# set size of a file
 	def setSizeOfFile(self, size):
 		self.size = size
@@ -118,6 +136,9 @@ class Info:
 	def getAvPositives(self):
 		return self.positives
 
+	# get Trusted AV
+#	def isAvTrusted(self, av):
+#		return self.av.getTrusted()
 
 class AV:
 
@@ -138,6 +159,9 @@ class AV:
 
 		# update
 		self.update = ""
+
+		# trusted AV
+		self.trusted = None
 
 	# set av name
 	def setName(self, name):
@@ -181,3 +205,13 @@ class AV:
 	def getUpdate(self):
 		return self.update
 
+	# set AV as trusted
+	def setTrusted(self):
+
+		# AV name in the top av list
+		if self.name in constants.top_av:
+			self.trusted = True 
+
+	# check whether AV is trusted
+	def getTrusted(self):
+		return self.trusted
